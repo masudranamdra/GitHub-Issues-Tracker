@@ -11,27 +11,27 @@ const searchBtn = document.getElementById('search-btn');
 
 
 // search input
-searchBtn.addEventListener('click',  ()=>{
+searchBtn.addEventListener('click', () => {
     const searchValue = searchInput.value.trim().toLowerCase();;
-    
+
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
-    .then(res=> res.json())
-    .then(data=> {
-        const allIssues = data.data;
-        // console.log(allIssues)
-        const filterIssus = allIssues.filter(issues=> issues.title.toLowerCase().includes(searchValue));
-        // console.log(filterIssus);
-        displayIssues(filterIssus);
-    })
+        .then(res => res.json())
+        .then(data => {
+            const allIssues = data.data;
+
+            const filterIssus = allIssues.filter(issues => issues.title.toLowerCase().includes(searchValue));
+
+            displayIssues(filterIssus);
+        })
 })
 
 
-// show loading spinner
+// show loading 
 const showSpinner = () => {
     spinner.classList.remove('hidden');
     spinner.classList.add('flex');
 }
-// hide loading spinner
+// hide loading 
 const hideSpinner = () => {
     spinner.classList.add('hidden');
 }
@@ -43,11 +43,11 @@ const loadIssues = async () => {
     const data = await res.json();
     hideSpinner()
     displayIssues(data.data);
-    alldata = data.data; //alldata er modde shokol issues card add kora
-    // console.log(alldata)
+    alldata = data.data;
+
 }
 
-// fetch id wise issue
+
 const showModal = async (id) => {
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
     const res = await fetch(url);
@@ -56,10 +56,10 @@ const showModal = async (id) => {
 }
 
 
-// show modal
+// modal
 const displayIssuesDetails = (issue) => {
 
-    // const borderClass = issue.status.trim().toLowerCase() === 'open' ? 'border-green-500' : 'border-purple-500';
+
     boxDetails.classList.add('border-4', 'border-teal-700');
 
     boxDetails.innerHTML = `
@@ -94,7 +94,7 @@ const displayIssuesDetails = (issue) => {
             </div>
     `
     const mic = document.getElementById('mic');
-    mic.addEventListener('click',()=>{
+    mic.addEventListener('click', () => {
         issuesTitle(issue.title)
     })
     document.getElementById('issue_modal').showModal()
@@ -104,7 +104,7 @@ const displayIssuesDetails = (issue) => {
 // display issues
 const displayIssues = (issues) => {
     issuesContainer.innerHTML = '';
-    countIssues.innerText = issues.length; 
+    countIssues.innerText = issues.length;
 
     issues.forEach(issue => {
         const issuesCard = document.createElement('div');
@@ -142,25 +142,25 @@ const filterCategories = (id) => {
     openFilterBtn.classList.remove('btn-primary');
     closedFilterBtn.classList.remove('btn-primary');
 
-    // add active btn style
+    // add active btn 
     const active = document.getElementById(id);
     active.classList.add('btn-primary');
 }
 
 
-//open btn filter 
+//open btn 
 openFilterBtn.addEventListener('click', () => {
     const openCards = alldata.filter(open => open.status === 'open');
     displayIssues(openCards)
 })
 
-//closed btn filter
+//closed btn 
 closedFilterBtn.addEventListener('click', () => {
     const closedCards = alldata.filter(closed => closed.status === 'closed');
     displayIssues(closedCards);
 })
 
-//all btn filter
+//all btn 
 allFilterBtn.addEventListener('click', () => {
     const allCards = alldata;
     displayIssues(allCards)
