@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- tailwind and daisiui -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- css link -->
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+    <div class="login-card">
+        <div class="logo">
+            <img src="./assets/github-logo.png" alt="">
+        </div>
+
+        <h1>GitHub Issues Tracker</h1>
+        <p class="subtitle">Sign in to manage your issues</p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter Username" required>
+                <span class="hint">Default: admin</span>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <span class="hint">Default: admin123</span>
+            </div>
+
+
+            <button type="submit" class="btn-signin ">Sign In</button>
+        </form>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <div class="demo-box">
+            <span class="demo-box-label">Demo Credentials:</span>
+            <div class="demo-creds">Username: <span
+                    style="font-size: 18px; font-weight: 300; color: rgb(142, 142, 143);">admin</span></div>
+            <div class="demo-creds">Password: <span
+                    style="font-size: 18px; font-weight: 300; color: rgb(142, 142, 143);">admin123</span></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === "admin" && password === "admin123") {
+
+                alert("Login Successful");
+
+                // redirect to issues page
+                window.location.href = "./Issues/index.html";
+
+            } else {
+
+                alert("Invalid Username or Password");
+
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>
